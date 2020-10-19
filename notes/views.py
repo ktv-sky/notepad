@@ -1,15 +1,23 @@
 from django.shortcuts import render, get_object_or_404, redirect
 
 from .models import Note
+from .forms import NoteModelForm
 
 
 def note_list_view(request):
+    form = NoteModelForm()
+    if request.method == 'POST':
+        form = NoteModelForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('note-list')
     to_do_list = Note.objects.filter(finished=False)
     finished_list = Note.objects.filter(finished=True)
 
     return render(request, 'notes/note_list.html', {
         'to_do_list': to_do_list,
-        'finished_list': finished_list
+        'finished_list': finished_list,
+        'form': form,
     })
 
 
