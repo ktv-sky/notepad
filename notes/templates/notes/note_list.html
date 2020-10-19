@@ -1,0 +1,64 @@
+{% extends 'notes/base.html' %}
+
+{% block content %}
+
+<style>
+h4 {
+    position: relative;
+}
+
+.icons {
+    position: absolute;
+    right: 5px;
+}
+
+</style>
+
+    <div class="text-center mt-3">
+        <h3>To-Do List</h3>
+    </div>
+    <hr />
+    <div class="row">
+        {% for note in to_do_list %}
+        <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h4>{{ note.title }}
+                <span class="badge badge-{{ note.get_label_display }}">
+                {{ note.due_date}}
+                </span>
+                <span class="icons">
+                <a href="{{ note.get_finish_item_url }}"><i class="fas fa-check"></i></a>
+                <a href="{{ note.get_delete_item_url }}"><i class="fas fa-trash" style="color: red;"></i></a>
+                </span>
+                </h4>
+            </div>
+        </div>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="text-center mt-3">
+        <h3>Finished List</h3>
+    </div>
+    <hr />
+    <div class="row">
+        {% for note in finished_list %}
+        <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h4>{{ note.title }}
+                <span class="badge badge-{{ note.get_label_display }}">
+                {{ note.due_date}}
+                </span>
+                <span class="icons">
+                <a href="{{ note.get_recover_item_url }}"><i class="fas fa-times"></i></a>
+                <a href="{{ note.get_delete_item_url }}"><i class="fas fa-trash" style="color: red;"></i></a>
+                </span>
+                </h4>
+            </div>
+        </div>
+        </div>
+        {% endfor %}
+    </div>
+
+{% endblock content %}
