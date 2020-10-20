@@ -1,0 +1,16 @@
+{% extends 'notes/base.html' %}
+
+{% block content %}
+
+    <p><h3>Log in to your account</h3></p>
+    <hr />
+
+    <form method="POST" action="" class="form">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Log In</button>
+
+        <input type="hidden" name="next" value="{% url 'note-list' %}" />
+    </form>
+
+{% endblock content %}

@@ -1,5 +1,6 @@
 from django.db import models
 from django.shortcuts import reverse
+from django.contrib.auth.models import User
 
 
 LABEL_CHOICES = (
@@ -18,6 +19,7 @@ class Note(models.Model):
     due_date = models.DateField()
     label = models.CharField(choices=LABEL_CHOICES, max_length=2)
     finished = models.BooleanField(default=False)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.title
